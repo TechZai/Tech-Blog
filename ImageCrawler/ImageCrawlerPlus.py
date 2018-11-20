@@ -84,6 +84,7 @@ def crawl(name, need_pic_count):
             if success_pic_count >= need_pic_count:
                 break
 
+
 if __name__ == '__main__':
 
     pic_count = 200
