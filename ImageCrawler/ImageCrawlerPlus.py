@@ -5,7 +5,7 @@ import json
 from multiprocessing import Pool
 
 
-def crawl(name, need_pic_count):
+def crawl(name, need_pic_count, resume_fetch):
 
     # create store folder
     pic_store_folder = './Data/%s/' % name
@@ -16,6 +16,8 @@ def crawl(name, need_pic_count):
     next_pic_index = 0
     pic_max_end = need_pic_count
     success_pic_count = 0
+    if resume_fetch:
+        success_pic_count = len(os.listdir(pic_store_folder))
     while success_pic_count < min(pic_max_end, need_pic_count):
         # 抓取网页内容
         paramters = {
@@ -92,6 +94,7 @@ if __name__ == '__main__':
         config = json.load(f)
         pic_count = config["countPerItem"]
         process_count = config["processCount"]
+        resume_fetch = config["resumeFetch"]
     mode = input(u'图像抓取程序，'
                  u'\n抓取结果存放在exe相同目录Data文件夹下, 每条抓取%d张'
                  u'\n抓取模式'
@@ -119,7 +122,7 @@ if __name__ == '__main__':
                 print(query_name)
 
                 if len(query_name):
-                    p.apply_async(crawl, (query_name, pic_count))
+                    p.apply_async(crawl, (query_name, pic_count, resume_fetch))
                     # crawl(query_name, pic_count)
 
             p.close()

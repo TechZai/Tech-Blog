@@ -1,4 +1,5 @@
 {
-  "countPerItem" : 50,
-  "processCount" : 1
+  "countPerItem" : 100,
+  "processCount" : 1,
+  "resumeFetch" : 1
 }
