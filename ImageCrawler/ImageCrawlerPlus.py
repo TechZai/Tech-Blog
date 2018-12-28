@@ -18,6 +18,7 @@ def crawl(name, need_pic_count, resume_fetch):
     success_pic_count = 0
     if resume_fetch:
         success_pic_count = len(os.listdir(pic_store_folder))
+        next_pic_index = success_pic_count
     while success_pic_count < min(pic_max_end, need_pic_count):
         # 抓取网页内容
         paramters = {
